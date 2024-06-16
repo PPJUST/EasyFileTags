@@ -3,6 +3,7 @@
 _FILE_PKL = './tags.pkl'
 
 # 图标
+_ICON_TAG = './icon/tag.ico'
 _ICON_ADD = './icon/add.png'
 _ICON_DELETE = './icon/delete.png'
 _ICON_RESTORE = './icon/restore.png'

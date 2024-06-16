@@ -3,7 +3,8 @@ import os
 from PySide6.QtGui import QPalette, QColor, QIcon, QPixmap, Qt, QDragEnterEvent, QDropEvent
 from PySide6.QtWidgets import QMainWindow, QApplication, QInputDialog, QListWidgetItem, QMessageBox
 
-from constant import _ICON_ADD, _ICON_DELETE, _ICON_RESTORE, _ICON_CONFIRM, _ICON_CLEAR, _ICON_DOWN, _IDENTIFIER
+from constant import _ICON_ADD, _ICON_DELETE, _ICON_RESTORE, _ICON_CONFIRM, _ICON_CLEAR, _ICON_DOWN, _IDENTIFIER, \
+    _ICON_TAG
 from module import function_config, function_normal
 from ui.checkBox_tag import CheckBoxTag
 from ui.ui_main import Ui_MainWindow
@@ -286,6 +287,7 @@ def main():
     app.setPalette(palette)
     show_ui = Main()
     show_ui.show()
+    show_ui.setWindowIcon(QIcon(_ICON_TAG))
     app.exec()
 
 
