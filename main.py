@@ -45,6 +45,7 @@ class Main(QMainWindow):
         self.parent_dirpath = None
         self.filetitle = None
         self.suffix = None
+        self.ui.listWidget_tag.setEnabled(False)
 
         # 加载数据库中的tag
         self.load_tags_db()
@@ -66,6 +67,7 @@ class Main(QMainWindow):
         self.ui.label_filename_original.setText(self.filetitle)
         self.ui.label_filename_preview.setText(self.filetitle)
         self.show_file_tag()
+        self.ui.listWidget_tag.setEnabled(True)
 
     def load_tags_db(self):
         """加载数据库中的tag"""
@@ -169,7 +171,7 @@ class Main(QMainWindow):
         split_filename = filename_old.split(identifier)
         # 删除未选中的tag
         check_tags = [i.upper() for i in tags_unselected]
-        for part in split_filename.copy():
+        for part in split_filename.copy()[1:]:  # 使用[1:]，防止出现分割后的第1个元素不含标识符但是和tag同名
             if part.strip().upper() in check_tags:
                 split_filename.remove(part)
         # 添加选中的tag
@@ -194,7 +196,7 @@ class Main(QMainWindow):
             filename_with_suffix = no_dup_filename + self.suffix
             if filename_with_suffix.upper() in files_exists:
                 count += 1
-                no_dup_filename = preview_filename + f'-New{count}'
+                no_dup_filename = preview_filename + f' - New{count}'
             else:
                 break
 
@@ -235,6 +237,7 @@ class Main(QMainWindow):
         self.ui.label_filename_preview.clear()
 
         self.load_tags_db()
+        self.ui.listWidget_tag.setEnabled(False)
 
     def get_tags_in_widget(self, list_widget):
         tags_selected = []
