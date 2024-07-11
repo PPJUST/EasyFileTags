@@ -144,13 +144,13 @@
        </layout>
       </widget>
       <widget class="QWidget" name="layoutWidget">
-       <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,0,0,0">
+       <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,0,0,0,0">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0,1">
           <item>
            <widget class="QLabel" name="label_filename_original">
             <property name="text">
-             <string>拖入到此处</string>
+             <string>拖动文件/文件夹到程序上即可读取</string>
             </property>
             <property name="wordWrap">
              <bool>true</bool>
@@ -215,6 +215,13 @@
            </spacer>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_rename_make_sure">
+          <property name="text">
+           <string>改名前需手工确认</string>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">

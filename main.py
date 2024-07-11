@@ -43,9 +43,11 @@ class Main(QMainWindow):
         self.filetype = None
         self.path = None
         self.parent_dirpath = None
+        self.filename = None
         self.filetitle = None
         self.suffix = None
         self.ui.listWidget_tag.setEnabled(False)
+        self.ui.pushButton_confirm.setEnabled(False)
 
         # 加载数据库中的tag
         self.load_tags_db()
@@ -55,19 +57,20 @@ class Main(QMainWindow):
         if not path:
             return
         self.path = path
-        self.parent_dirpath, filename = os.path.split(path)
+        self.parent_dirpath, self.filename = os.path.split(path)
         if os.path.isdir(path):
             self.filetype = 'dir'
-            self.filetitle = filename
+            self.filetitle = self.filename
             self.suffix = ''
         else:
             self.filetype = 'file'
-            self.filetitle, self.suffix = os.path.splitext(filename)
+            self.filetitle, self.suffix = os.path.splitext(self.filename)
 
         self.ui.label_filename_original.setText(self.filetitle)
         self.ui.label_filename_preview.setText(self.filetitle)
         self.show_file_tag()
         self.ui.listWidget_tag.setEnabled(True)
+        self.ui.pushButton_confirm.setEnabled(True)
 
     def load_tags_db(self):
         """加载数据库中的tag"""
@@ -187,10 +190,17 @@ class Main(QMainWindow):
 
     def rename(self):
         """执行改名"""
+        # 检查文件是否存在
+        if not os.path.exists(self.path):
+            QMessageBox.warning(self, '错误', '该文件/文件夹不存在')
+            return
+
         # 检查重名文件名
         preview_filename = self.ui.label_filename_preview.text()
         no_dup_filename = preview_filename  # 该文件名不含后缀
-        files_exists = [i.upper() for i in os.listdir(self.parent_dirpath)]
+        files_exists = [i for i in os.listdir(self.parent_dirpath)]
+        files_exists.remove(self.filename)  # 剔除自身，防止结果文件名未变动时会被添加后缀重命名
+        files_exists = [i.upper() for i in files_exists]  # 统一转为大写，用于测试重复文件名
         count = 0
         while True:
             filename_with_suffix = no_dup_filename + self.suffix
@@ -201,10 +211,17 @@ class Main(QMainWindow):
                 break
 
         # 重命名
-        result = QMessageBox.question(self, '重命名', f'是否重命名为"{no_dup_filename}"',
-                                      QMessageBox.Yes | QMessageBox.No)
+        is_make_sure = self.ui.checkBox_rename_make_sure.isChecked()
+        if is_make_sure:
+            result = QMessageBox.question(self, '重命名', f'是否重命名为"{no_dup_filename}"',
+                                          QMessageBox.Yes | QMessageBox.No)
+        else:
+            result = QMessageBox.Yes
+
         if result == QMessageBox.Yes:
             new_path = os.path.normpath(os.path.join(self.parent_dirpath, no_dup_filename + self.suffix))
+            if new_path == self.path:
+                return
             try:
                 os.rename(self.path, new_path)
                 self.reset_app()
@@ -238,6 +255,7 @@ class Main(QMainWindow):
 
         self.load_tags_db()
         self.ui.listWidget_tag.setEnabled(False)
+        self.ui.pushButton_confirm.setEnabled(False)
 
     def get_tags_in_widget(self, list_widget):
         tags_selected = []

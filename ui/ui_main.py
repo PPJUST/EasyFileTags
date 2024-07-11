@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_mainRURrkn.ui'
+## Form generated from reading UI file 'ui_mainmhNKpW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.3
 ##
@@ -141,6 +141,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addLayout(self.horizontalLayout_2)
 
+        self.checkBox_rename_make_sure = QCheckBox(self.layoutWidget)
+        self.checkBox_rename_make_sure.setObjectName(u"checkBox_rename_make_sure")
+
+        self.verticalLayout_4.addWidget(self.checkBox_rename_make_sure)
+
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.pushButton_clear = QPushButton(self.layoutWidget)
@@ -176,10 +181,11 @@ class Ui_MainWindow(object):
         self.toolButton_restore_tag.setText(QCoreApplication.translate("MainWindow", u"\u8fd8\u539f", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"\u6587\u4ef6\u8bc6\u522bTag", None))
         self.toolButton_restore_tag_file.setText(QCoreApplication.translate("MainWindow", u"\u8fd8\u539f", None))
-        self.label_filename_original.setText(QCoreApplication.translate("MainWindow", u"\u62d6\u5165\u5230\u6b64\u5904", None))
+        self.label_filename_original.setText(QCoreApplication.translate("MainWindow", u"\u62d6\u52a8\u6587\u4ef6/\u6587\u4ef6\u5939\u5230\u7a0b\u5e8f\u4e0a\u5373\u53ef\u8bfb\u53d6", None))
         self.label_down.setText(QCoreApplication.translate("MainWindow", u"\u2193", None))
         self.label_filename_preview.setText(QCoreApplication.translate("MainWindow", u"\u9884\u671f\u6587\u4ef6\u540d", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u6807\u8bc6\u7b26:", None))
+        self.checkBox_rename_make_sure.setText(QCoreApplication.translate("MainWindow", u"\u6539\u540d\u524d\u9700\u624b\u5de5\u786e\u8ba4", None))
         self.pushButton_clear.setText(QCoreApplication.translate("MainWindow", u"\u6e05\u9664Tag", None))
         self.pushButton_confirm.setText(QCoreApplication.translate("MainWindow", u"\u786e\u8ba4\u4fee\u6539", None))
     # retranslateUi
