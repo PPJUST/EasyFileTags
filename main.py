@@ -56,6 +56,8 @@ class Main(QMainWindow):
         """拖入文件"""
         if not path:
             return
+        self.reset_app()
+
         self.path = path
         self.parent_dirpath, self.filename = os.path.split(path)
         if os.path.isdir(path):
@@ -256,6 +258,7 @@ class Main(QMainWindow):
         self.load_tags_db()
         self.ui.listWidget_tag.setEnabled(False)
         self.ui.pushButton_confirm.setEnabled(False)
+        self.restore_tag_state()
 
     def get_tags_in_widget(self, list_widget):
         tags_selected = []
